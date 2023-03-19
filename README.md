@@ -6,7 +6,7 @@
 
 - Clone the repository
 - Run "docker-compose up"
-- The application will run on port 3000
+- The server will run on port 3000
 - The database will run on port 3306
 
 ✔ Crud users
