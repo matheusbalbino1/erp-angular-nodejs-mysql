@@ -1,6 +1,11 @@
 import { Request, Response } from "express";
 import { userModel } from "../../../models/userModel";
-import { IUserCreate, IUserShow } from "../interfaces/IUser";
+import {
+  IUserCreate,
+  IUserDelete,
+  IUserShow,
+  IUserUpdate,
+} from "../interfaces/IUser";
 
 class UserControllers {
   async index(request: Request, response: Response) {
@@ -41,7 +46,7 @@ class UserControllers {
     }
   }
 
-  async update(request: Request, response: Response) {
+  async update(request: Request<IUserUpdate>, response: Response) {
     try {
       const find_user = await userModel.findOne({
         where: { id: request.params.id },
@@ -64,7 +69,7 @@ class UserControllers {
     }
   }
 
-  async delete(request: Request, response: Response) {
+  async delete(request: Request<IUserDelete>, response: Response) {
     try {
       const find_user = await userModel.findOne({
         where: { id: request.params.id },
