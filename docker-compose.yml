@@ -1,23 +1,30 @@
 version: "3.8"
 
 services:
-  db:
+  mysql:
     image: mysql:8.0
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: password
-    volumes:
-      - /my/mysql/data:/var/lib/mysql
+      MYSQL_DATABASE: erp
+    # volumes:
+    #   - /my/mysql/data:/var/lib/mysql
     ports:
       - 3306:3306
-  # server:
-  #   build:
-  #     context: ./server
-  #     dockerfile: Dockerfile
-  #   ports:
-  #     - "3000:3000"
-  #   depends_on:
-  #     - db
-  #   environment:
-  #     - PORT_NODE=3000
-  #     - MYSQL_ROOT_PASSWORD=password
+    networks:
+      - erp-angular
+  server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    restart: always
+    command: bash -c "npm run dev"
+    ports:
+      - "3000:3000"
+    networks:
+      - erp-angular
+    depends_on:
+      - mysql
+networks:
+  erp-angular:
+    driver: bridge
