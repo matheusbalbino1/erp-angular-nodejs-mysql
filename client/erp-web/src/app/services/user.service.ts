@@ -1,11 +1,16 @@
 import { Injectable } from '@angular/core';
-import { ICreateUser } from '../interfaces/IUser';
-
+import { ICreateUser, IResponseCreateUser } from '../interfaces/IUser';
+import { HttpClient } from '@angular/common/http';
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
-  constructor() {}
+  constructor(private http: HttpClient) {}
 
-  create(dataUser: ICreateUser) {}
+  create(dataUser: ICreateUser) {
+    return this.http.post<IResponseCreateUser>(
+      'api/user',
+      dataUser
+    );
+  }
 }

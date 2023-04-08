@@ -1,4 +1,17 @@
-export interface ICreateUser {
-  name: string;
+export interface User {
+  id: number;
+  createdAt: Date;
+  updatedAt: Date;
+  username: string;
   password: string;
+}
+
+export interface ICreateUser {
+  username: string;
+  password: string;
+}
+
+export interface IResponseCreateUser {
+  status: string;
+  message: User;
 }

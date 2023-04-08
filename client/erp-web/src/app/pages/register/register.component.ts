@@ -7,6 +7,9 @@ import {
 } from '@angular/forms';
 import { ICreateUser } from 'src/app/interfaces/IUser';
 import { UserService } from 'src/app/services/user.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { mapErrorUser } from 'src/app/mapErrors';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -15,34 +18,44 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class RegisterComponent {
   formGroup = new FormGroup({
-    name: new FormControl('', Validators.required),
+    username: new FormControl('', Validators.required),
     password: new FormControl('', Validators.required),
   });
 
-  validatorMessages = {
-    name: {
-      required: 'Mínimo 3 caracteres',
-      active: false,
-    },
-    password: {
-      required: 'Mínimo 3 caracteres',
-      active: false,
-    },
-  };
-
   constructor(
     private formBuilder: FormBuilder,
-    private userService: UserService
+    private userService: UserService,
+    private snackBar: MatSnackBar,
+    private router: Router
   ) {
     this.formGroup = this.formBuilder.group({
-      name: ['', Validators.required],
+      username: ['', Validators.required],
       password: ['', Validators.required],
     });
   }
 
+  dispatchSnackBar(message: string) {
+    this.snackBar.open(message, 'Fechar', {
+      duration: 3000,
+      horizontalPosition: 'end',
+      verticalPosition: 'top',
+    });
+  }
+
   handleSubmit() {
-    if (this.formGroup.valid) {
-      this.userService.create(this.formGroup.value as ICreateUser);
+    if (this.formGroup.invalid) {
+      this.dispatchSnackBar('Preencha todos os campos');
+      return;
     }
+
+    this.userService.create(this.formGroup.value as ICreateUser).subscribe({
+      complete: () => {
+        this.dispatchSnackBar('Usuário criado com sucesso');
+        this.router.navigate(['/login']);
+      },
+      error: ({ error: { message } }) => {
+        this.dispatchSnackBar(mapErrorUser(message || ''));
+      },
+    });
   }
 }

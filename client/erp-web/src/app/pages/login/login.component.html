@@ -1,29 +1,19 @@
 <main class="page">
-  <mat-card
-    [ngStyle]="{
-      display: 'flex',
-      'flex-direction': 'column',
-      'max-width': '400px'
-    }"
-  >
-    <mat-card-content>
-      <h1 [ngStyle]="{ color: '#555' }">Acessar sua conta</h1>
-      <form class="example-form">
-        <mat-form-field class="example-full-width input" appearance="outline">
-          <mat-label>Usuário</mat-label>
-          <input matInput />
-        </mat-form-field>
-        <mat-form-field class="example-full-width input" appearance="outline">
-          <mat-label>Senha</mat-label>
-          <input matInput />
-        </mat-form-field>
-        <div class="containerButtons">
-          <button mat-raised-button color="primary">Entrar</button>
-          <button mat-button color="primary" routerLink="/register">
-            Registrar-se
-          </button>
-        </div>
-      </form></mat-card-content
-    >
-  </mat-card>
+  <app-card>
+    <h1 [ngStyle]="{ color: '#555' }">Acessar sua conta</h1>
+    <form class="example-form">
+      <mat-form-field class="example-full-width input" appearance="outline">
+        <mat-label>Usuário</mat-label>
+        <input matInput />
+      </mat-form-field>
+      <mat-form-field class="example-full-width input" appearance="outline">
+        <mat-label>Senha</mat-label>
+        <input matInput />
+      </mat-form-field>
+      <div class="containerButtons">
+        <button mat-raised-button color="accent">Entrar</button>
+        <button mat-button routerLink="/register">Registrar-se</button>
+      </div>
+    </form>
+  </app-card>
 </main>

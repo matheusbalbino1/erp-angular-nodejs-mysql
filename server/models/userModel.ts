@@ -2,7 +2,7 @@ import Sequelize from "sequelize";
 import exec from "child_process";
 
 const db = new Sequelize.Sequelize("erp", "root", "password", {
-  host: "erp-angular-nodejs-mysql-mysql-1",
+  host: "database",
   dialect: "mysql",
   port: 3306,
   database: "erp",
@@ -29,6 +29,10 @@ export const userModel = db.define("users", {
     type: Sequelize.DATE,
     allowNull: false,
     defaultValue: Sequelize.NOW,
+  },
+  password: {
+    type: Sequelize.STRING,
+    allowNull: false,
   },
 });
 

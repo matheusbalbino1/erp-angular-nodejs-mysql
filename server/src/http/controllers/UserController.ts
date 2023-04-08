@@ -13,7 +13,7 @@ class UserControllers {
       const users = await userModel.findAll();
       response.status(200).json({ status: "sucess", message: users });
     } catch (error) {
-      response.status(404).json({ status: "error", error: error?.message });
+      response.status(404).json({ status: "error", message: error?.message });
     }
   }
 
@@ -21,14 +21,17 @@ class UserControllers {
     try {
       const created_user = await userModel.findOrCreate({
         where: { username: request.body.username },
-        defaults: { username: request.body.username },
+        defaults: {
+          username: request.body.username,
+          password: request.body.password,
+        },
       });
 
       if (!created_user[1]) throw new Error("User already exists!");
 
       response.status(200).json({ status: "sucess", message: created_user[0] });
     } catch (error) {
-      response.status(400).json({ status: "error", error: error?.message });
+      response.status(400).json({ status: "error", message: error?.message });
     }
   }
 
@@ -42,7 +45,7 @@ class UserControllers {
 
       response.status(200).json({ status: "sucess", message: found_user });
     } catch (error) {
-      response.status(404).json({ status: "error", error: error?.message });
+      response.status(404).json({ status: "error", message: error?.message });
     }
   }
 
@@ -65,7 +68,7 @@ class UserControllers {
 
       response.status(200).json({ status: "sucess", message: updated_user });
     } catch (error) {
-      response.status(400).json({ status: "error", error: error?.message });
+      response.status(400).json({ status: "error", message: error?.message });
     }
   }
 
@@ -81,7 +84,7 @@ class UserControllers {
 
       response.status(200).json({ status: "sucess" });
     } catch (error) {
-      response.status(400).json({ status: "error", error: error?.message });
+      response.status(400).json({ status: "error", message: error?.message });
     }
   }
 }

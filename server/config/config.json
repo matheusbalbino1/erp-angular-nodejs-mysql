@@ -4,7 +4,7 @@
     "password": "password",
     "database": "erp",
     "port": 3306,
-    "host": "mysql",
+    "host": "database",
     "dialect": "mysql"
   },
   "test": {
@@ -12,7 +12,7 @@
     "password": "password",
     "database": "erp",
     "port": 3306,
-    "host": "mysql",
+    "host": "database",
     "dialect": "mysql"
   },
   "production": {
@@ -20,7 +20,7 @@
     "password": "password",
     "database": "erp",
     "port:": 3306,
-    "host": "mysql",
+    "host": "database",
     "dialect": "mysql"
   }
 }
