@@ -1,44 +1,64 @@
-import Sequelize from "sequelize";
+import { Sequelize, Model, DataTypes } from "sequelize";
 import exec from "child_process";
 
-const db = new Sequelize.Sequelize("erp", "root", "password", {
-  host: "database",
+interface UserAttributes {
+  id: number;
+  username: string;
+  createdAt: Date;
+  updatedAt: Date;
+  password: string;
+}
+
+export class userModel extends Model<UserAttributes> implements UserAttributes {
+  public id!: number;
+  public username!: string;
+  public createdAt!: Date;
+  public updatedAt!: Date;
+  public password!: string;
+}
+
+const sequelize = new Sequelize("erp", "root", "password", {
   dialect: "mysql",
-  port: 3306,
-  database: "erp",
+  host: "database",
 });
 
-export const userModel = db.define("users", {
-  id: {
-    type: Sequelize.INTEGER,
-    primaryKey: true,
-    autoIncrement: true,
-    allowNull: false,
+userModel.init(
+  {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+      allowNull: false,
+    },
+    username: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
+    },
+    createdAt: {
+      type: DataTypes.DATE,
+      allowNull: false,
+      defaultValue: DataTypes.NOW,
+    },
+    updatedAt: {
+      type: DataTypes.DATE,
+      allowNull: false,
+      defaultValue: DataTypes.NOW,
+    },
+    password: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
   },
-  username: {
-    type: Sequelize.STRING,
-    allowNull: false,
-    unique: true,
-  },
-  createdAt: {
-    type: Sequelize.DATE,
-    allowNull: false,
-    defaultValue: Sequelize.NOW,
-  },
-  updatedAt: {
-    type: Sequelize.DATE,
-    allowNull: false,
-    defaultValue: Sequelize.NOW,
-  },
-  password: {
-    type: Sequelize.STRING,
-    allowNull: false,
-  },
-});
+  {
+    sequelize,
+    tableName: "users",
+  }
+);
 
 const authenticate = async () => {
   try {
-    await db.authenticate();
+    await sequelize.authenticate();
 
     exec.exec("sequelize db:migrate", (error) => {
       if (error) {
