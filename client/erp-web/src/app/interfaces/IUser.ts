@@ -15,3 +15,8 @@ export interface IResponseCreateUser {
   status: string;
   message: User;
 }
+
+export interface IAuthUser {
+  username: string;
+  password: string;
+}

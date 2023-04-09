@@ -1,17 +1,31 @@
 <main class="page">
   <app-card>
     <h1 [ngStyle]="{ color: '#555' }">Acessar sua conta</h1>
-    <form class="example-form">
+    <form
+      class="example-form"
+      [formGroup]="formGroup"
+      (ngSubmit)="handleSubmit()"
+    >
       <mat-form-field class="example-full-width input" appearance="outline">
         <mat-label>Usuário</mat-label>
-        <input matInput />
+        <input
+          matInput
+          type="text"
+          name="username"
+          formControlName="username"
+        />
       </mat-form-field>
       <mat-form-field class="example-full-width input" appearance="outline">
         <mat-label>Senha</mat-label>
-        <input matInput />
+        <input
+          matInput
+          type="password"
+          name="password"
+          formControlName="password"
+        />
       </mat-form-field>
       <div class="containerButtons">
-        <button mat-raised-button color="accent">Entrar</button>
+        <button mat-raised-button color="accent" type="submit">Entrar</button>
         <button mat-button routerLink="/register">Registrar-se</button>
       </div>
     </form>

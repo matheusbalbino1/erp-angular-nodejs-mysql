@@ -16,6 +16,7 @@ const router = Router();
 const userControllers = new UserControllers();
 
 router.use("/auth", authRoutes);
+
 router.post("/user", userControllers.create);
 router.use("/user", verifyToken, userRoutes);
 
