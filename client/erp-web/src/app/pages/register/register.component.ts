@@ -8,7 +8,7 @@ import {
 import { ICreateUser } from 'src/app/interfaces/IUser';
 import { UserService } from 'src/app/services/user.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { mapErrorUser } from 'src/app/mapErrors';
+import { mapErrors } from 'src/app/mapErrors';
 import { Router } from '@angular/router';
 
 @Component({
@@ -54,7 +54,7 @@ export class RegisterComponent {
         this.router.navigate(['/login']);
       },
       error: ({ error: { message } }) => {
-        this.dispatchSnackBar(mapErrorUser(message || ''));
+        this.dispatchSnackBar(mapErrors(message || ''));
       },
     });
   }
