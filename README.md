@@ -2,7 +2,7 @@
 
 ### Techs: Docker, Angular, NodeJS, Sequelize, MySql, TypeScript e Express
 
-### Para rodar é necessário apenas o Docker
+### Need Docker to run
 
 - Clone the repository
 - Run "docker-compose up"
