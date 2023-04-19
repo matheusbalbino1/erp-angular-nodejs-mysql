@@ -59,6 +59,8 @@ export class LoginComponent {
         const dataToken = await this.jwt_jose.decodeJwt(message);
         const expirationDate = new Date(Number(dataToken?.exp) * 1000);
         this.cookieService.set('token', message, expirationDate);
+        this.dispatchSnackBar('Login realizado com sucesso!');
+        this.dispatchSnackBar('Token salvo no cookie!');
       },
     });
   }
