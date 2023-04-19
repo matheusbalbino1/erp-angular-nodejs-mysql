@@ -6,6 +6,7 @@
 
 - Clone the repository
 - Run "docker-compose up"
+- The client Angular run on port 8080
 - The server run on port 3000
 - The database run on port 3306
 
