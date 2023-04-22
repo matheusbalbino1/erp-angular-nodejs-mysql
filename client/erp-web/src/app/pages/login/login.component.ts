@@ -7,10 +7,7 @@ import {
 } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { IAuthUser } from 'src/app/interfaces/IUser';
-import { mapErrors } from 'src/app/mapErrors';
 import { AuthService } from 'src/app/services/auth.service';
-import * as jose from 'jose';
-import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-login',
@@ -22,19 +19,16 @@ export class LoginComponent {
     username: new FormControl('', Validators.required),
     password: new FormControl('', Validators.required),
   });
-  jwt_jose: typeof jose;
 
   constructor(
     private formBuilder: FormBuilder,
     private snackBar: MatSnackBar,
-    private authService: AuthService,
-    private cookieService: CookieService
+    private authService: AuthService
   ) {
     this.formGroup = this.formBuilder.group({
       username: ['', Validators.required],
       password: ['', Validators.required],
     });
-    this.jwt_jose = jose;
   }
 
   dispatchSnackBar(message: string) {
@@ -50,18 +44,8 @@ export class LoginComponent {
       this.dispatchSnackBar('Preencha todos os campos');
       return;
     }
+    
+    this.authService.authenticate(this.formGroup.value as IAuthUser);
 
-    this.authService.authenticate(this.formGroup.value as IAuthUser).subscribe({
-      error: ({ error: { message } }) => {
-        this.dispatchSnackBar(mapErrors(message || ''));
-      },
-      next: async ({ message }) => {
-        const dataToken = await this.jwt_jose.decodeJwt(message);
-        const expirationDate = new Date(Number(dataToken?.exp) * 1000);
-        this.cookieService.set('token', message, expirationDate);
-        this.dispatchSnackBar('Login realizado com sucesso!');
-        this.dispatchSnackBar('Token salvo no cookie!');
-      },
-    });
   }
 }
