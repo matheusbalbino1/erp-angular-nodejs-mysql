@@ -8,9 +8,6 @@ export class UserService {
   constructor(private http: HttpClient) {}
 
   create(dataUser: ICreateUser) {
-    return this.http.post<IResponseCreateUser>(
-      'api/user',
-      dataUser
-    );
+    return this.http.post<IResponseCreateUser>('api/user', dataUser);
   }
 }
