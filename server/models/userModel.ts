@@ -62,6 +62,8 @@ const authenticate = async () => {
 
     exec.exec("sequelize db:migrate", (error) => {
       if (error) {
+        console.log("######################################################");
+        console.log(error);
         console.error("Migrations not performed!");
         return;
       }

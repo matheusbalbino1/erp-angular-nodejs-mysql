@@ -44,6 +44,8 @@ export class LoginComponent {
       this.dispatchSnackBar('Preencha todos os campos');
       return;
     }
+    
     this.authService.authenticate(this.formGroup.value as IAuthUser);
+
   }
 }

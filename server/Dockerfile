@@ -9,6 +9,8 @@ WORKDIR /usr/app
 
 COPY package*.json ./
 
+RUN npm install -g nodemon ts-node sequelize-cli
+
 RUN npm install
 
 COPY . .
