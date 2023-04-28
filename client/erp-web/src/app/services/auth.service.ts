@@ -7,6 +7,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { mapErrors } from '../mapErrors';
 import * as jose from 'jose';
 import { CookieService } from 'ngx-cookie-service';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -17,7 +18,8 @@ export class AuthService {
   constructor(
     private http: HttpClient,
     private snackBar: MatSnackBar,
-    private cookieService: CookieService
+    private cookieService: CookieService,
+    private routerService: Router
   ) {
     this.jwt_jose = jose;
   }
@@ -41,6 +43,7 @@ export class AuthService {
         const expirationDate = new Date(Number(dataToken?.exp) * 1000);
         this.cookieService.set('token', message, expirationDate);
         this.dispatchSnackBar('Cookie setado com sucesso!');
+        this.routerService.navigate(['/home']);
       },
     });
   }
