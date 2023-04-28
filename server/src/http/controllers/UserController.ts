@@ -49,16 +49,18 @@ class UserControllers {
     }
   }
 
-  async update(request: Request<IUserUpdate>, response: Response) {
+  async update(
+    request: Request<IUserUpdate, {}, IUserCreate>,
+    response: Response
+  ) {
     try {
       const find_user = await userModel.findOne({
         where: { id: request.params.id },
       });
 
       if (!find_user) throw new Error("User not found!");
-
       await userModel.update(
-        { username: request.body.username },
+        { username: request.body?.username, password: request.body?.password },
         { where: { id: request.params.id } }
       );
 
