@@ -17,7 +17,7 @@ class AuthController {
       if (!getUser) throw new Error("User not found!");
 
       const token = jwt.sign({ id: getUser.id }, ASSING_JWT, {
-        expiresIn: 300,
+        expiresIn: 3600,
       });
 
       return response.status(200).json({ status: "sucess", message: token });

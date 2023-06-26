@@ -35,22 +35,22 @@ export class AuthService {
   public authenticate(dataUser: IAuthUser): void {
     this.http.post<IResponse>('api/auth/login', dataUser).subscribe({
       error: ({ error: { message } }) => {
-        console.log(message);
         this.dispatchSnackBar(mapErrors(message || ''));
       },
       next: async ({ message }) => {
         const dataToken = this.jwt_jose.decodeJwt(message);
         const expirationDate = new Date(Number(dataToken?.exp) * 1000);
         this.cookieService.set('token', message, expirationDate);
-        this.dispatchSnackBar('Cookie setado com sucesso!');
-        this.routerService.navigate(['/home']);
+        this.dispatchSnackBar('Token setado no cookie expira em 1 hora!');
+        this.routerService.navigate(['/user']);
       },
     });
   }
 
   public logout(): void {
     this.cookieService.delete('token');
-    this.dispatchSnackBar('Cookie deletado com sucesso!');
+    this.routerService.navigate(['/login']);
+    this.dispatchSnackBar('Deslogado e cookie deletado com sucesso!');
   }
 
   public isAuthenticated(): boolean {

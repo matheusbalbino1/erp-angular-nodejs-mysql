@@ -1,0 +1,14 @@
+<mat-card class="d-flex justify-content-end p-1 flex-row" style="gap: 1rem">
+  <div class="container-user">
+    <i class="bi bi-person-circle"></i>
+    <span>{{ username }}#{{ user_id }}</span>
+  </div>
+  <button
+    mat-button
+    style="color: crimson"
+    (click)="logout()"
+    matTooltip="Return to login page"
+  >
+    Deslogar
+  </button>
+</mat-card>
