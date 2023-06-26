@@ -1,5 +1,5 @@
 import { Sequelize, Model, DataTypes } from "sequelize";
-import exec from "child_process";
+import { sequelize } from ".";
 
 interface UserAttributes {
   id: number;
@@ -16,11 +16,6 @@ export class userModel extends Model<UserAttributes> implements UserAttributes {
   public updatedAt!: Date;
   public password!: string;
 }
-
-const sequelize = new Sequelize("erp", "root", "password", {
-  dialect: "mysql",
-  host: "database",
-});
 
 userModel.init(
   {
@@ -55,26 +50,3 @@ userModel.init(
     tableName: "users",
   }
 );
-
-const authenticate = async () => {
-  try {
-    await sequelize.authenticate();
-
-    exec.exec("sequelize db:migrate", (error) => {
-      if (error) {
-        console.log("######################################################");
-        console.log(error);
-        console.error("Migrations not performed!");
-        return;
-      }
-      console.log("Migrations performed!");
-    });
-  } catch (err) {
-    setTimeout(() => {
-      console.log("Try to reconnect to the database...");
-      authenticate();
-    }, 10000);
-  }
-};
-
-authenticate();

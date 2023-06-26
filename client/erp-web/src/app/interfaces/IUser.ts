@@ -20,3 +20,13 @@ export interface IAuthUser {
   username: string;
   password: string;
 }
+
+export interface IGetUsers {
+  status: string;
+  message: User[];
+}
+
+export interface IGetUser {
+  status: string;
+  message: User;
+}

@@ -16,11 +16,16 @@ services:
     depends_on:
       - server
   mysql:
-    build:
-      context: ./database
-      dockerfile: Dockerfile
     container_name: database
+    image: mysql:8.0
     restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: erp
+    # volumes:s
+    #   - /my/mysql/data:/var/lib/mysql
+    ports:
+      - 3306:3306
     # volumes:
     #   - /my/mysql/data:/var/lib/mysql
     networks:
