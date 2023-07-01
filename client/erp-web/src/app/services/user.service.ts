@@ -8,6 +8,7 @@ import {
 import { HttpClient } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
 import * as jose from 'jose';
+import { BACKEND_NODE } from '../enviroments/enviroments';
 
 @Injectable({
   providedIn: 'root',
@@ -28,21 +29,26 @@ export class UserService {
   }
 
   getUserById(id: string) {
-    return this.http.get<IGetUser>(`api/user/${id}`, {
-      headers: {
-        Authorization: `Bearer ${this.cookieService.get('token')}`,
-      },
-    });
+    return this.http.get<IGetUser>(`${BACKEND_NODE}/user/${id}`);
   }
   getAll() {
-    return this.http.get<IGetUsers>('api/user', {
-      headers: {
-        Authorization: `Bearer ${this.cookieService.get('token')}`,
-      },
-    });
+    return this.http.get<IGetUsers>(`${BACKEND_NODE}/user`);
   }
 
   create(dataUser: ICreateUser) {
-    return this.http.post<IResponseCreateUser>('api/user', dataUser);
+    return this.http.post<IResponseCreateUser>(
+      `${BACKEND_NODE}/user`,
+      dataUser
+    );
+  }
+
+  update(id: number, dataUser: ICreateUser) {
+    return this.http.put<IResponseCreateUser>(`${BACKEND_NODE}/user/${id}`, {
+      ...dataUser,
+    });
+  }
+
+  delete(id: number) {
+    return this.http.delete<IResponseCreateUser>(`${BACKEND_NODE}/user/${id}`);
   }
 }

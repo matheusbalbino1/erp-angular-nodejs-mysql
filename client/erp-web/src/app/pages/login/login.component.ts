@@ -6,6 +6,7 @@ import {
   FormBuilder,
 } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 import { IAuthUser } from 'src/app/interfaces/IUser';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -23,12 +24,18 @@ export class LoginComponent {
   constructor(
     private formBuilder: FormBuilder,
     private snackBar: MatSnackBar,
-    private authService: AuthService
+    private authService: AuthService,
+    private routerService: Router
   ) {
     this.formGroup = this.formBuilder.group({
       username: ['', Validators.required],
       password: ['', Validators.required],
     });
+  }
+
+  ngOnInit(): void {
+    const isAuthenticated = this.authService.isAuthenticated();
+    if (isAuthenticated) this.routerService.navigate(['/user']);
   }
 
   dispatchSnackBar(message: string) {

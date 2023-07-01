@@ -1,0 +1,40 @@
+<mat-progress-bar mode="indeterminate" *ngIf="loading"></mat-progress-bar>
+<h1 mat-dialog-title>Editar usuário</h1>
+<div mat-dialog-content>
+  <form
+    class="d-flex flex-column pt-1"
+    [formGroup]="formGroup"
+    (ngSubmit)="submit()"
+  >
+    <mat-form-field class="example-full-width input" appearance="outline">
+      <mat-label>Usuário</mat-label>
+      <input
+        matInput
+        type="text"
+        name="username"
+        formControlName="username"
+        [defaultValue]="user.username"
+      />
+    </mat-form-field>
+    <mat-form-field class="example-full-width input" appearance="outline">
+      <mat-label>Senha</mat-label>
+      <input
+        matInput
+        type="text"
+        name="password"
+        formControlName="password"
+        [defaultValue]="user.password"
+      />
+    </mat-form-field>
+  </form>
+</div>
+<div
+  mat-dialog-actions
+  class="d-flex justify-content-end"
+  style="padding: 0 24px 24px 0"
+>
+  <button mat-stroked-button color="primary" (click)="deleteUser()">
+    Excluir
+  </button>
+  <button mat-raised-button color="accent" (click)="submit()">Editar</button>
+</div>
