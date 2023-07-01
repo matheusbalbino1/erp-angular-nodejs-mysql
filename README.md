@@ -1,6 +1,6 @@
 # ERP
 
-### Techs: Jwt, Docker, Angular, NodeJS, Sequelize, MySql, TypeScript e Express
+### Techs: Jwt, Docker, Angular, NodeJS, Sequelize, MySql, TypeScript and Express
 
 ### Need Docker to run
 
