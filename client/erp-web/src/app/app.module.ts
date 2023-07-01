@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -26,6 +26,8 @@ import { UserComponent } from './pages/user/user.component';
 import { HeaderNavComponent } from './components/header-nav/header-nav.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ModalCreateUserComponent } from './components/modal-create-user/modal-create-user.component';
+import { ModalEditUserComponent } from './components/modal-edit-user/modal-edit-user.component';
+import { TokenInterceptorService } from './services/token-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -37,6 +39,7 @@ import { ModalCreateUserComponent } from './components/modal-create-user/modal-c
     UserComponent,
     HeaderNavComponent,
     ModalCreateUserComponent,
+    ModalEditUserComponent,
   ],
   imports: [
     BrowserModule,
@@ -58,7 +61,13 @@ import { ModalCreateUserComponent } from './components/modal-create-user/modal-c
     MatDialogModule,
     MatProgressBarModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptorService,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

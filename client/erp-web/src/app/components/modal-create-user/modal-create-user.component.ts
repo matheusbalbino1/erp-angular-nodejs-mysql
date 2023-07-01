@@ -35,16 +35,19 @@ export class ModalCreateUserComponent {
       this.dispatchSnackBar('Preencha todos os campos');
       return;
     }
+    this.loading = true;
     this.userService
       .create({
         password: this.formGroup.get('password')?.value as string,
         username: this.formGroup.get('username')?.value as string,
       })
-      .subscribe(({ message }) => {
+      .subscribe(async ({ message }) => {
+        await new Promise((resolve) => setTimeout(resolve, 1000));
         this.dialogRef.close(true);
         this.dispatchSnackBar(
           `Usuário ${message.username}#${message.id} criado com sucesso!`
         );
+        this.loading = false;
       });
   }
 }

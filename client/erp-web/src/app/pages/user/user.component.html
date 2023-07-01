@@ -5,7 +5,7 @@
     mat-raised-button
     style="margin: 1rem 0 1rem auto; display: block"
     color="primary"
-    matTooltip="Open modal to create user"
+    matTooltip="Abrir modal para criar usuário"
     (click)="openModalCreateUser()"
   >
     Criar usuário
@@ -24,6 +24,22 @@
       <ng-container matColumnDef="password">
         <th mat-header-cell *matHeaderCellDef>Password</th>
         <td mat-cell *matCellDef="let element">{{ element.password }}</td>
+      </ng-container>
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let element">
+          <div class="container-buttons">
+            <button
+              mat-stroked-button
+              class="button-action button-edit"
+              color="primary"
+              matTooltip="Abrir modal para editar e excluir usuário"
+              (click)="openModalEditUser(element)"
+            >
+              Editar
+            </button>
+          </div>
+        </td>
       </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

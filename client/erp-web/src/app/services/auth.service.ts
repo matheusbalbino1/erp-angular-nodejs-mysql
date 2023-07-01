@@ -8,6 +8,7 @@ import { mapErrors } from '../mapErrors';
 import * as jose from 'jose';
 import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
+import { BACKEND_NODE } from '../enviroments/enviroments';
 
 @Injectable({
   providedIn: 'root',
@@ -33,18 +34,20 @@ export class AuthService {
   }
 
   public authenticate(dataUser: IAuthUser): void {
-    this.http.post<IResponse>('api/auth/login', dataUser).subscribe({
-      error: ({ error: { message } }) => {
-        this.dispatchSnackBar(mapErrors(message || ''));
-      },
-      next: async ({ message }) => {
-        const dataToken = this.jwt_jose.decodeJwt(message);
-        const expirationDate = new Date(Number(dataToken?.exp) * 1000);
-        this.cookieService.set('token', message, expirationDate);
-        this.dispatchSnackBar('Token setado no cookie expira em 1 hora!');
-        this.routerService.navigate(['/user']);
-      },
-    });
+    this.http
+      .post<IResponse>(`${BACKEND_NODE}/auth/login`, dataUser)
+      .subscribe({
+        error: ({ error: { message } }) => {
+          this.dispatchSnackBar(mapErrors(message || ''));
+        },
+        next: async ({ message }) => {
+          const dataToken = this.jwt_jose.decodeJwt(message);
+          const expirationDate = new Date(Number(dataToken?.exp) * 1000);
+          this.cookieService.set('token', message, expirationDate);
+          this.dispatchSnackBar('Token setado no cookie expira em 1 hora!');
+          this.routerService.navigate(['/user']);
+        },
+      });
   }
 
   public logout(): void {
