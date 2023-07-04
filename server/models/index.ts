@@ -10,7 +10,7 @@ const authenticate = async () => {
   try {
     await sequelize.authenticate();
 
-    exec.exec("sequelize db:migrate", (error) => {
+    exec.exec("npx sequelize-cli db:migrate", (error) => {
       if (error) {
         console.log("######################################################");
         console.log(error);

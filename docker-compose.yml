@@ -36,8 +36,8 @@ services:
       context: ./server
       dockerfile: Dockerfile
     container_name: server
-    restart: always
-    command: bash -c "npm run dev"
+    environment:
+      - NODE_ENV=production
     ports:
       - "3000:3000"
     networks:

@@ -1,18 +1,20 @@
-FROM node:18-alpine
+FROM node:16.14
 
-RUN apk update && apk add bash
-
-ENV NODE_ENV=production
+# ASSINATURA UNICA PARA O JWT
 ENV ASSIGN_JWT=password
 
-WORKDIR /usr/app
+# DIRETÓRIO DE TRABALHO NO DOCKER
+WORKDIR /app
 
+# COPIAR SEPARADO PARA NÃO INSTALAR TODAS AS DEPENDENCIAS TODA VEZ QUE ALTERAR O CÓDIGO
 COPY package*.json ./
-
-RUN npm install -g nodemon ts-node sequelize-cli
 
 RUN npm install
 
 COPY . .
+
+RUN npm run build
+
+CMD node dist/src/index.js
 
 EXPOSE 3000
