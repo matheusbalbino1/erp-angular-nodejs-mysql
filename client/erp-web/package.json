@@ -1,6 +1,7 @@
 {
   "name": "erp-web",
   "version": "0.0.0",
+  "node_version": "14.21.3",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
