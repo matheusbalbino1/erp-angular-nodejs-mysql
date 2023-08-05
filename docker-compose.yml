@@ -5,8 +5,9 @@ services:
     build:
       context: ./client/erp-web
       dockerfile: Dockerfile
+
     ports:
-      - "8080:80"
+      - "3002:100"
     container_name: client
     extra_hosts:
       - "server:192.168.1.12"
@@ -45,6 +46,22 @@ services:
         ipv4_address: 192.168.1.12
     depends_on:
       - mysql
+
+  server-nestjs:
+    build:
+      context: ./server-nest
+      dockerfile: Dockerfile
+    container_name: server-nestjs
+    environment:
+      - NODE_ENV=development
+    ports:
+      - "3001:3001"
+    networks:
+      erp-angular:
+        ipv4_address: 192.168.1.13
+    depends_on:
+      - mysql
+
 networks:
   erp-angular:
     driver: bridge
