@@ -5,7 +5,6 @@ services:
     build:
       context: ./client/erp-web
       dockerfile: Dockerfile
-
     ports:
       - "3002:100"
     container_name: client
@@ -34,7 +33,7 @@ services:
         ipv4_address: 192.168.1.11
   server:
     build:
-      context: ./server
+      context: ./server-express
       dockerfile: Dockerfile
     container_name: server
     environment:
@@ -49,7 +48,7 @@ services:
 
   server-nestjs:
     build:
-      context: ./server-nest
+      context: ./server-nestjs
       dockerfile: Dockerfile
     container_name: server-nestjs
     environment:

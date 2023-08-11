@@ -1,2 +1,3 @@
-server/node_modules/
+server-express/node_modules/
 client/erp-web/node_modules/
+server-nestjs/node_modules/
