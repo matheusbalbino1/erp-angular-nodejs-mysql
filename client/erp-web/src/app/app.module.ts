@@ -28,6 +28,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ModalCreateUserComponent } from './components/modal-create-user/modal-create-user.component';
 import { ModalEditUserComponent } from './components/modal-edit-user/modal-edit-user.component';
 import { TokenInterceptorService } from './services/token-interceptor.service';
+import { DialogNavComponent } from './components/dialog-nav/dialog-nav.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { TokenInterceptorService } from './services/token-interceptor.service';
     HeaderNavComponent,
     ModalCreateUserComponent,
     ModalEditUserComponent,
+    DialogNavComponent,
   ],
   imports: [
     BrowserModule,

@@ -53,7 +53,7 @@ export class AuthService {
   public logout(): void {
     this.cookieService.delete('token');
     this.routerService.navigate(['/login']);
-    this.dispatchSnackBar('Deslogado e cookie deletado com sucesso!');
+    this.dispatchSnackBar('Deslogado e token do cookie deletado com sucesso!');
   }
 
   public isAuthenticated(): boolean {

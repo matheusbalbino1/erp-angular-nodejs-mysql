@@ -1,4 +1,15 @@
-<mat-card class="d-flex justify-content-end p-1 flex-row" style="gap: 1rem">
+<mat-card
+  class="d-flex justify-content-end p-1 flex-row align-items-center"
+  style="gap: 1rem"
+>
+  <button
+    mat-button
+    class="container-nav-icon"
+    matTooltip="Abrir menu de navegação"
+    (click)="openMenuNav()"
+  >
+    <i class="bi bi-x-diamond-fill"></i>
+  </button>
   <div class="container-user">
     <i class="bi bi-person-circle"></i>
     <span>{{ username }}#{{ user_id }}</span>

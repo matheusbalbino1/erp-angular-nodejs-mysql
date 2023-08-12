@@ -1,4 +1,3 @@
-<app-header-nav></app-header-nav>
 <section class="wrapper">
   <h1 style="color: #686868">Usuários</h1>
   <button
@@ -18,11 +17,11 @@
         <td mat-cell *matCellDef="let element">{{ element.id }}</td>
       </ng-container>
       <ng-container matColumnDef="username">
-        <th mat-header-cell *matHeaderCellDef>Name</th>
+        <th mat-header-cell *matHeaderCellDef>Nome</th>
         <td mat-cell *matCellDef="let element">{{ element.username }}</td>
       </ng-container>
       <ng-container matColumnDef="password">
-        <th mat-header-cell *matHeaderCellDef>Password</th>
+        <th mat-header-cell *matHeaderCellDef>Senha</th>
         <td mat-cell *matCellDef="let element">{{ element.password }}</td>
       </ng-container>
       <ng-container matColumnDef="action">
