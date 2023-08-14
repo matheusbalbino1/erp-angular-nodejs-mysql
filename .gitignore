@@ -1,3 +1,8 @@
-server-express/node_modules/
 client/erp-web/node_modules/
+client/erp-web/dist/
+
+server-express/node_modules/
+server-express/dist/
+
 server-nestjs/node_modules/
+server-nestjs/dist/
